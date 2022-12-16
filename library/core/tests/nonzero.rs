@@ -129,6 +129,12 @@ fn test_from_signed_nonzero() {
 }
 
 #[test]
+fn test_from_option_nonzero() {
+    assert_eq!(NonZeroU32::new(1).into(), 1u32);
+    assert_eq!(NonZeroU32::new(0).into(), 0u32);
+}
+
+#[test]
 fn test_from_str() {
     assert_eq!("123".parse::<NonZeroU8>(), Ok(NonZeroU8::new(123).unwrap()));
     assert_eq!("0".parse::<NonZeroU8>().err().map(|e| e.kind().clone()), Some(IntErrorKind::Zero));
