@@ -98,6 +98,18 @@ macro_rules! nonzero_integers {
                 }
             }
 
+            #[stable(feature = "from_option_nonzero", since = "1.68.0")]
+            impl From<$Ty> for $Int {
+                #[doc = concat!("Converts a `Some(", stringify!($Ty), ")` into an `", stringify!($Int), "`, and a `None` to `0`")]
+                #[inline]
+                fn from(value: Option<$Ty>) -> Self {
+                    match value {
+                        Some(inner) => inner.0,
+                        None => 0,
+                    }
+                }
+            }
+
             #[stable(feature = "nonzero_bitor", since = "1.45.0")]
             #[rustc_const_unstable(feature = "const_ops", issue = "90080")]
             impl const BitOr for $Ty {
